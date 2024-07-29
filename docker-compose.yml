@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  web-scraper:
+    build: .
+    container_name: web_scraper
+    depends_on:
+      - minio
+    environment:
+      - AWS_ACCESS_KEY_ID=${MINIO_ACCESS_KEY}
+      - AWS_SECRET_ACCESS_KEY=${MINIO_SECRET_KEY}
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_S3_ENDPOINT=http://minio:9000
+    volumes:
+      - .:/app
+
+  minio:
+    image: minio/minio
+    container_name: minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY}
+    command: server /data --console-address ":9001"

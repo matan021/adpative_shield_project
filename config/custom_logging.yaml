@@ -1,0 +1,30 @@
+version: 1
+disable_existing_loggers: False
+
+formatters:
+    simple:
+        format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+
+handlers:
+    console:
+        class: logging.StreamHandler
+        level: DEBUG
+        formatter: simple
+        stream: ext://sys.stdout
+
+    file_handler:
+        class: logging.FileHandler
+        level: DEBUG
+        formatter: simple
+        filename: C:\\Users\\Matan\\PycharmProjects\\adpative_shild_project\\logs\\app.log  # Ensure this path is correct and accessible
+        mode: 'a'
+
+loggers:
+    app_logger:
+        level: DEBUG
+        handlers: [file_handler, console]
+        propagate: no
+
+root:
+    level: DEBUG
+    handlers: [file_handler, console]
