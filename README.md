@@ -29,7 +29,7 @@ This project is designed to scrape images and tables from websites and store the
 
 4. dev running 
 ```shell
-docker-compose -f path/to/your/docker-compose-dev.yml up
+docker-compose -f docker-compose-dev.yml up
 python src/main.py
 ```
 
